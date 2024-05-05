@@ -26,8 +26,8 @@ export function formatPrice(
   }).format(numericPrice)
 }
 export function constructMetadata({
-  title = 'DigitalHippo - the marketplace for digital assets',
-  description = 'DigitalHippo is an open-source marketplace for high-quality digital goods.',
+  title = 'Igme - the marketplace for digital assets',
+  description = 'Igme is an open-source marketplace for high-quality digital goods.',
   image = '/thumbnail.png',
   icons = '/favicon.ico',
   noIndex = false,
@@ -58,7 +58,7 @@ export function constructMetadata({
       creator: '@igmemarcial',
     },
     icons,
-    metadataBase: new URL('https://digitalhippo.up.railway.app'),
+    metadataBase: new URL('https://marketplace-production-ccd0.up.railway.app'),
     ...(noIndex && {
       robots: {
         index: false,

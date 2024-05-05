@@ -8,8 +8,8 @@ import { Resend } from 'resend'
 import { ReceiptEmailHtml } from './components/emails/ReceiptEmail'
 
 // Crea una instancia de la clase Resend con la clave de API proporcionada en la variable de entorno
-const API_KEY = 're_QBcqJWTL_CvWoxie1kQZd1QfRmn9sixJo'
-const resend = new Resend(API_KEY)
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 //función que maneja las solicitudes de webhook de Stripe
 export const stripeWebhookHandler = async (

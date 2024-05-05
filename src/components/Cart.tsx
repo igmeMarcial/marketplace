@@ -85,7 +85,7 @@ const Cart = () => {
                       className: "w-full",
                     })}
                   >
-                    Continue to Checkout
+                    Continuar a la comprobación
                   </Link>
                 </SheetTrigger>
               </SheetFooter>
@@ -103,7 +103,9 @@ const Cart = () => {
                 alt="empty shopping cart hippo"
               />
             </div>
-            <div className="text-xl font-semibold">Your cart is empty</div>
+            <div className="text-xl font-semibold">
+              Tu carrito aún está vacío.
+            </div>
             <SheetTrigger asChild>
               <Link
                 href="/products"
@@ -113,7 +115,7 @@ const Cart = () => {
                   className: "text-sm text-muted-foreground",
                 })}
               >
-                Add items to your cart to checkout
+                Comienza a llenarlo.
               </Link>
             </SheetTrigger>
           </div>

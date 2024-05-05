@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { trpc } from "@/trpc/client";
+
 import { toast } from "sonner";
 import { ZodError } from "zod";
 import { useRouter } from "next/navigation";
@@ -17,8 +17,11 @@ import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
 
 const Page = () => {
+  // Inicializa el formulario y maneja su estado y validación utilizando `useForm` del hook `react-hook-form`.
+  // Define el esquema de validación utilizando `zodResolver` y el validador `AuthCredentialsValidator`.
   const {
     register,
     handleSubmit,
@@ -26,8 +29,18 @@ const Page = () => {
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
   });
+  // Obtiene acceso al objeto de enrutamiento utilizando el hook `useRouter` de `next/navigation`.
 
   const router = useRouter();
+
+  // El siguiente bloque de código define una mutación utilizando `trpc.auth.createPayloadUser.useMutation`.
+  // Esta mutación se utiliza para enviar datos al servidor y manejar su resultado.
+  // Se define una función `onError` que se ejecutará si hay un error en la mutación.
+  // En el caso de un error de conflicto (CONFLICT), se muestra un mensaje de error indicando que el correo electrónico ya está en uso.
+  // Si el error es una instancia de `ZodError`, se muestra el primer mensaje de error.
+  // Si ocurre cualquier otro tipo de error, se muestra un mensaje de error genérico.
+  // Se define una función `onSuccess` que se ejecutará si la mutación tiene éxito.
+  // En este caso, se muestra un mensaje de éxito indicando que se ha enviado un correo electrónico de verificación y se redirige al usuario a la página de verificación de correo electrónico.
 
   const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({
     onError: (err) => {
@@ -62,7 +75,7 @@ const Page = () => {
           <div className="flex flex-col items-center space-y-2 text-center">
             <Icons.logo className="h-20 w-20" />
             <h1 className="text-2xl font-semibold tracking-tight">
-              Create an account
+              Crear una cuenta
             </h1>
 
             <Link
@@ -72,7 +85,7 @@ const Page = () => {
               })}
               href="/sign-in"
             >
-              Already have an account? Sign-in
+              ¿Ya tienes una cuenta? Iniciar sesión
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -87,7 +100,7 @@ const Page = () => {
                     className={cn({
                       "focus-visible:ring-red-500": errors.email,
                     })}
-                    placeholder="you@example.com"
+                    placeholder="tucorreo@example.com"
                   />
                   {errors?.email && (
                     <p className="text-sm text-red-500">
@@ -97,7 +110,7 @@ const Page = () => {
                 </div>
 
                 <div className="grid gap-1 py-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Contraseña</Label>
                   <Input
                     {...register("password")}
                     type="password"
@@ -113,12 +126,13 @@ const Page = () => {
                   )}
                 </div>
 
-                <Button>Sign up</Button>
+                <Button>Crear</Button>
               </div>
             </form>
           </div>
         </div>
       </div>
+      <div></div>
     </>
   );
 };
